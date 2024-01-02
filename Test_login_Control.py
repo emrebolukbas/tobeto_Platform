@@ -30,16 +30,48 @@ class Test_tobetoPlatformLogin():
             data.append((username,password))
 
         return data
-     
+    
+    #1)Giriş yap alanı görüntülenebilir ve işlevselliği test edilecektir.
+    def test_visibility_of_login_page(self):
+        tobeto_Img = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_PAGE_TOBETO_IMG)))
+        email_input = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
+        password_input = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
+        loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
+        sign_up = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_TEXT)))
 
-    def test_email_password_passing_empty(self):
+        assert tobeto_Img,email_input and password_input and loginButton and sign_up.text == "Henüz üye değil misin? Kayıt Ol"
+        
+    #2)Kullanıcının e-posta veya şifre bilgilerini boş girerek sisteme giriş yapabilmesi test edilecektir.
+    @pytest.mark.parametrize("email_param, password_param", [("", ""),("test@test.com",""),("","testSifre")])
+    def test_passing_empty(self,email_param,password_param):
         eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
-        eMail.send_keys("")
+        eMail.send_keys(email_param)
+        password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
+        password.send_keys(password_param)    
+        loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
+        loginButton.click()
+        errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MANDATORY_FIELD_XPATH)))
+        assert errorMessage.text == "Doldurulması zorunlu alan*"
+  
+"""     def test_password_passing_empty(self):
+        eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
+        eMail.send_keys("test@test.com")
         password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
         password.send_keys("")    
         loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
         loginButton.click()
         errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MANDATORY_FIELD_XPATH)))
         assert errorMessage.text == "Doldurulması zorunlu alan*"
-    
+     
+    def test_email_passing_empty(self):
+        eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
+        eMail.send_keys("")
+        password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
+        password.send_keys("testSifre")    
+        loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
+        loginButton.click()
+        errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MANDATORY_FIELD_XPATH)))
+        assert errorMessage.text == "Doldurulması zorunlu alan*"
+ """
+
     
