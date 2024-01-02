@@ -20,14 +20,14 @@ class Test_tobetoPlatformLogin():
         self.driver.quit()
     
     def getData():
-        excel = openpyxl.load_workbook("data/invlalidLogin.xlsx")
+        excel = openpyxl.load_workbook("data/invalidLogin.xlsx")
         sheet = excel["Sheet1"]
         rows = sheet.max_row
         data = []
         for i in range(2,rows+1):
-            username = sheet.cell(i,1).value
+            email = sheet.cell(i,1).value
             password = sheet.cell(i,2).value
-            data.append((username,password))
+            data.append((email,password))
 
         return data
     
@@ -52,7 +52,21 @@ class Test_tobetoPlatformLogin():
         loginButton.click()
         errorMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MANDATORY_FIELD_XPATH)))
         assert errorMessage.text == "Doldurulması zorunlu alan*"
-  
+    
+    #3Kullanıcının e-posta ve şifre bilgilerini yanlış girerek sisteme giriş yapması  test edilecektir.
+    @pytest.mark.parametrize("email_param, password_param", getData())
+    def test_invlalidLogin(self,email_param,password_param):
+        eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
+        eMail.send_keys(email_param)
+        password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
+        password.send_keys(password_param)
+        loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
+        loginButton.click()
+        
+        systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,c.SYSTEM_MESSAGE)))
+        #assert systemMessage.text == "• Geçersiz e-posta veya şifre."
+        assert "Geçersiz e-posta veya şifre." in systemMessage.text
+         
 """     def test_password_passing_empty(self):
         eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
         eMail.send_keys("test@test.com")
@@ -74,4 +88,6 @@ class Test_tobetoPlatformLogin():
         assert errorMessage.text == "Doldurulması zorunlu alan*"
  """
 
-    
+
+
+        
