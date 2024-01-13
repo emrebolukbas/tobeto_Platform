@@ -8,3 +8,4 @@ FORGOT_PASSWORD = "//*[@id='__next']/div/main/section/div/div/div/div/form/label
 SIGN_UP_TEXT = "//*[@id='__next']/div/main/section/div/div/div/div/div[2]/label/small"
 SYSTEM_MESSAGE = "//*[@id='__next']/div/main/div[2]/div/div[2]"
 
+
