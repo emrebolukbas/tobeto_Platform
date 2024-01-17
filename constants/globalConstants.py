@@ -7,5 +7,7 @@ LOGIN_PAGE_TOBETO_IMG = "//*[@id='__next']/div/main/section/div/div/div/div/div[
 FORGOT_PASSWORD = "//*[@id='__next']/div/main/section/div/div/div/div/form/label/small/p"
 SIGN_UP_TEXT = "//*[@id='__next']/div/main/section/div/div/div/div/div[2]/label/small"
 SYSTEM_MESSAGE = "//*[@id='__next']/div/main/div[2]/div/div[2]"
+MY_PROFIL_XPATH = "//*[@id='__next']/div/nav/div[1]/ul/li[2]/a"
+MY_PROFIL_CONTENT_XPATH = "//*[@id='__next']/div/nav/div[1]/ul/li[2]/a"
 
 
