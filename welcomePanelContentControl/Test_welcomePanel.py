@@ -17,7 +17,7 @@ class Test_tobetoWelcomePanel():
         self.driver.maximize_window()
         self.valid_login()
 
-    def teardown_metahod(self):
+    def teardown_method(self):
         self.driver.quit()
 
     def valid_login(self):
@@ -75,6 +75,7 @@ class Test_tobetoWelcomePanel():
         assessments = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/ul/li[3]/a")))
         assessments.click()
         softwareSuccessTest = WebDriverWait(self.driver,2).until(ec.visibility_of_all_elements_located((By.CLASS_NAME,"dashboard-card-slim")))
+        self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_DOWN)
         assert len(softwareSuccessTest) == 5
         startButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section[2]/div/div/div[4]/div/div[1]/button")))
         startButton.click()

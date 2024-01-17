@@ -16,7 +16,7 @@ class Test_tobetoPlatformLogin():
         self.driver.get(c.BASE_URL)
         self.driver.maximize_window()
 
-    def teardown_metahod(self):
+    def teardown_method(self):
         self.driver.quit()
     
     def getData():
