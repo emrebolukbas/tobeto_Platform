@@ -30,6 +30,7 @@ class Test_tobetoWelcomePanel():
         systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
         assert  "Giriş başarılı." in systemMessage.text
 
+    #1) Kullanıcının kişisel bilgi kısımlarının sayfa içerisinde görüntülenmesi test edilecektir.
     def test_myProfil_content_control(self):
         myProfil = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MY_PROFIL_XPATH)))
         myProfil.click()
@@ -42,7 +43,8 @@ class Test_tobetoWelcomePanel():
         assert nameSurnameContent.text == "Ad Soyad" 
         assert socialMediaContent.text == "Medya Hesaplarım" 
         assert activityMapContent.text == "Aktivite Haritam"
-    
+
+    #2) Kullanıcının profil linkinin kopyalayabilmesi test edilecektir.
     def test_tobeto_profil_link(self):
         myProfil = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.MY_PROFIL_XPATH)))
         myProfil.click()
@@ -56,6 +58,7 @@ class Test_tobetoWelcomePanel():
         systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
         assert  "Url kopyalandı." in systemMessage.text
     
+    #3) Kullanıcının Değerlendirmeler sayfasındaki başarı modeli testi içerisindeki başla butonunun işlevselliği test edilecektir.
     def test_assessments_success_model_test(self):
         assessments = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/ul/li[3]/a")))
         assessments.click()
@@ -67,6 +70,7 @@ class Test_tobetoWelcomePanel():
         assesmentsStartButtonContent = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div/div[3]/a")))
         assert  "Değerlendirmeye Başla" in assesmentsStartButtonContent.text
 
+    #4) Kullanıcının Değerlendirmeler sayfasındaki yazılımda başarı testindeki başla butonunun işlevselliği test edilecektir.
     def test_software_success_test(self):
         assessments = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/ul/li[3]/a")))
         assessments.click()
