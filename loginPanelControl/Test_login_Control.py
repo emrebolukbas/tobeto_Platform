@@ -63,7 +63,6 @@ class Test_tobetoPlatformLogin():
         password.send_keys(password_param)
         loginButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.LOGIN_BUTTON_XPATH)))
         loginButton.click()
-        
         systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,c.SYSTEM_MESSAGE)))
         #assert systemMessage.text == "• Geçersiz e-posta veya şifre."
         assert "Geçersiz e-posta veya şifre." in systemMessage.text
