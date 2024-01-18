@@ -66,8 +66,9 @@ class Test_tobetoWelcomePanel():
         assert assessmentsContent.text == "Değerlendirmeler"
         startButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section[2]/div/div/div[1]/div/a")))
         startButton.click()
-        sleep(1)
         assesmentsStartButtonContent = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div/div[3]/a")))
+        self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_DOWN)
+        sleep(1)
         assert  "Değerlendirmeye Başla" in assesmentsStartButtonContent.text
 
     #4) Kullanıcının Değerlendirmeler sayfasındaki yazılımda başarı testindeki başla butonunun işlevselliği test edilecektir.
@@ -83,15 +84,3 @@ class Test_tobetoWelcomePanel():
         testContent = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"/html/body/div[4]/div/div/div/div/div[1]/span")))
         assert  "Front End" in testContent.text
         
-
-    
-    
-
-
-    
-
-
-
-    
-
-    
