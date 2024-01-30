@@ -10,4 +10,3 @@ SYSTEM_MESSAGE = "//*[@id='__next']/div/main/div[2]/div/div[2]"
 MY_PROFIL_XPATH = "//*[@id='__next']/div/nav/div[1]/ul/li[2]/a"
 MY_PROFIL_CONTENT_XPATH = "//*[@id='__next']/div/nav/div[1]/ul/li[2]/a"
 
-
