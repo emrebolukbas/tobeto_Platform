@@ -116,11 +116,11 @@ class Test_tobetoWelcomePanel():
         catalog.click()
         teachersButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='headingOne']/button/div")))
         teachersButton.click()
-        teacher = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='collapseOne']/div/ul/li[3]/a")))
+        teacher = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='collapseOne']/div/ul/li[11]/a")))
         assert teacher.text == "Gürkan İlişen"
         self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_DOWN)
         sleep(1)
-        chooseteacher = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//div[@id='collapseOne']/div/ul/li[3]/a/input")))
+        chooseteacher = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//div[@id='collapseOne']/div/ul/li[11]/a/input")))
         chooseteacher.click()
         sleep(1)
         self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_UP)

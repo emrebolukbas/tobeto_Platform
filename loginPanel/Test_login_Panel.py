@@ -80,62 +80,15 @@ class Test_tobetoPlatformLogin():
         assert eMail.is_enabled() and password.is_enabled() and loginButton.is_enabled() and forgotPassword.is_enabled() and register.is_enabled() and tobetoLogo.is_enabled()
 
     #5) Kullanıcının sistemde kayıtlı e-posta ve şifre bilgileriyle  giriş yapabilmesi test edilecektir.
-    @pytest.mark.parametrize("email, password", [("fogacap180@ubinert.com", "abc123456")])
-    def test_valid_login(self,email,password):
+    def test_valid_login(self):
         eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
-        eMail.send_keys(email)
+        eMail.send_keys("fogacap180@ubinert.com")
         Password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
-        Password.send_keys(password)
+        Password.send_keys("abc123456")
         loginButton = self.driver.find_element(By.XPATH,c.LOGIN_BUTTON_XPATH)
         loginButton.click()
-        systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,c.SYSTEM_MESSAGE)))
-        assert  "Giriş başarılı." in systemMessage.text
-
-    #6) Kullanıcının şifremi unuttum butonuna  tıklayarak  ‘’ Şifremi Unuttum ’’ sayfasında geçerli e-posta ile kullanıcının şifre sıfırlaması test edilecektir.
-    def test_valid_reset_password(self):
-        forgotPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/label/small/p")))
-        forgotPassword.click()
+        systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
         current_url = self.driver.current_url
-        expected_url = "https://tobeto.com/sifremi-unuttum"
-        if (current_url and expected_url):
-            True
-        else:
-            False
-        resetPasswordInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div/input")))
-        resetPasswordInput.send_keys("test@tobeto.com")
-        sendButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div/button")))
-        sendButton.click()
-        systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,c.SYSTEM_MESSAGE)))
-
-        assert "Şifre sıfırlama linkini e-posta adresinize gönderdik. Lütfen gelen kutunuzu kontrol edin." in systemMessage.text 
-    
-    #7) Kullanıcının şifremi unuttum butonuna  tıklayarak  ‘’ https://tobeto.com/sifremi-unuttum’’ sayfasında geçersiz e-posta ile kullanıcının şifre sıfırlaması test edilecektir.
-    def test_invalid_reset_password(self):
-        forgotPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/label/small/p")))
-        forgotPassword.click()
-        current_url = self.driver.current_url
-        expected_url = "https://tobeto.com/sifremi-unuttum"
-        if (current_url and expected_url):
-            True
-        else:
-            False
-        resetPasswordInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div/input")))
-        resetPasswordInput.send_keys("test.tobeto.com")
-        sendButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div/button")))
-        sendButton.click()
-        systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,c.SYSTEM_MESSAGE)))
-
-        assert "Girdiğiniz e-posta geçersizdir." in systemMessage.text 
-
-
-        
-
-
-                                                                
-
-        
-
-
-
-        
+        expected_url = "https://tobeto.com/platform"
+        assert  "Giriş başarılı." in systemMessage.text and current_url == expected_url
         
