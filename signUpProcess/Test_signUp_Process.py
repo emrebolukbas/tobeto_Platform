@@ -21,7 +21,7 @@ def generate_random_email():
     email = f"{username}@{domain}.{extension}"
     return email
 
-class Test_tobetoWelcomePanel():
+class Test_signUp_Testing():
     def setup_method(self):
         self.driver = webdriver.Chrome()
         self.driver.get(c.BASE_URL)
