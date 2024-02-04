@@ -29,14 +29,14 @@
 <b>Adımlar:</b><br>
 <b>1-</b> call test (tc-9 Üst Menü(Navbar) Profilim Sekmesi)<br>
 <b>2-</b> Bağlantı butonuna tıkla.<br>
- 
+<img src="images/Picture6.png" alt="picture6"> 
 <b>3-</b> Profil linki penceresinin açıldığını kontrol et<br>
-
+<img src="images/Picture7.png" alt="picture7">
 <b>4-</b> Linki kopyala butonuna tıkla<br>
- 
+ <img src="images/Picture8.png" alt="picture8">
 <b>5-</b> ”Url kopyalandı.” Mesajının görüntülendiğini kontrol et.<br><br>
 <b>Beklenen Sonuç :</b> Ekrana sistem mesajı gelmelidir.Ekte bulunan görseldeki gibi olmalıdır.<br><br>
-  
+ <img src="images/Picture9.png" alt="picture9"> 
  
 <h4>Test Case 4 : Üst Menü(Navbar) Değerlendirmeler Sekmesi</h4>
 <b>Açıklama :</b> Kullanıcının Üst Menü üzerinde gezinebilirliği ve içeriklerinin görünürlüğü test edilecektir.<br>
