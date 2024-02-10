@@ -16,12 +16,11 @@ class Test_chatbot():
         self.driver = webdriver.Chrome()
         self.driver.get("https://tobeto.com/giris")
         self.driver.maximize_window()
-        self.test_login_page
       
     def teardown_method(self):
         self.driver.quit()
 
-    # 1) Giriş yap alanı görüntülenebilir ve işlevselliği test edilecektir.
+    # 1) Chatbotun kullanımı ve işlevselliği test edilecektir.
     def test_chatbot_check(self):
         chatbot_symbol_frame = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.ID, "exw-launcher-frame")))
         self.driver.switch_to.frame(chatbot_symbol_frame)
