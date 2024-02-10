@@ -17,7 +17,7 @@ class Test_calendar_Testing():
         self.driver.get(c.BASE_URL)
         self.driver.maximize_window()
 
-    def teardown_metahod(self):
+    def teardown_method(self):
         self.driver.quit()
         
     def test_calendar_visibility_of_login_page(self):
