@@ -240,3 +240,5 @@ Checkboxlarını işaretle.<br/>
 <b>Beklenen Sonuç :</b> Ekrana hata mesajı gelmelidir.Ekte bulunan görseldeki gibi olmalıdır.<br/><br/>
  <img src="images/Picture11.png" alt="picture11">                                 
 
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">

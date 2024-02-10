@@ -74,3 +74,5 @@
 
 <b>Beklenen Sonuç :</b>  İnput,buton ve bağlantı alanları tıklanabilir olmalıdır.<br><br>
 
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">

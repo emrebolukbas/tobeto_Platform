@@ -77,5 +77,6 @@
 <b>Beklenen Sonuç:</b>Gün butonuna tıklanıldığında takvim görseldeki gibi olur.<br>
 <img src="images/Picture14.png" alt="picture14">  
  
-
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">
 

@@ -120,7 +120,8 @@
 <b>Beklenen Sonuçlar:</b> Eğitim içeriği görseldeki  gibi görüntülenmelidir. <br><br>
 <img src="images/Picture19.png" alt="picture19"> 
 
-
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">
 
  
 

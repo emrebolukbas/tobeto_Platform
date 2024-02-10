@@ -78,7 +78,8 @@
 <b>Beklenen sonuç:</b> 'İletişim Formu'da alanlar boş bırakıldığında  bize doldurulması zorunlu alan  uyarısı vermelidir.Aşağıda görseli verilmiştir.<br><br>
 <img src="images/Picture8.png" alt="picture8"><br>
  
-
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">
 
 
 

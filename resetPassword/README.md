@@ -31,3 +31,5 @@
 <b>Beklenen sonuç:</b> Kullanıcı gönder tuşuna bastığında girilen e-posta adresi geçersiz formatta ise pop-up şeklinde ekteki mesajla karşılaşmalıdır.<br><br>
 <img src="images/Picture2.png" alt="picture2">                                                         
 
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">

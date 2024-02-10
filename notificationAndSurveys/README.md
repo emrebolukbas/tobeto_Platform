@@ -111,7 +111,8 @@ input:Önemli<br><br>
 <b>Beklenen Sonuç:</b>Kullanıcı kendisine anket tanımlanmadığında aşağıdaki görseldeki gibi bir mesajı alacaktır.<br><br>
 <img src="images/Picture20.png" alt="picture20">
 
-
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">
 
  
 

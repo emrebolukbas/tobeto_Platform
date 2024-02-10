@@ -43,3 +43,5 @@
 <img src="images/Picture8.png" alt="picture8">  
 <b>Beklenen Sonuç :</b>  Görüşmeyi sonlandırma butonuna tıklandığında 5 farklı butondan biri seçilerek kullanıcı bize puan verip görüşmeyi sonlandırabilmelidir.<br><br>
 
+<h2>PYTEST TEST SONUÇLARI</h2> 
+<img src="images/pytest-result.png" alt="pytest-result">
