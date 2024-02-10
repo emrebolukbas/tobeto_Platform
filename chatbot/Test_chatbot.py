@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 import pytest
 
 
-class Test_tobetoPlatformLogin():
+class Test_chatbot():
 
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -22,7 +22,7 @@ class Test_tobetoPlatformLogin():
         self.driver.quit()
 
     # 1) Giriş yap alanı görüntülenebilir ve işlevselliği test edilecektir.
-    def test_login_page(self):
+    def test_chatbot_check(self):
         chatbot_symbol_frame = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((By.ID, "exw-launcher-frame")))
         self.driver.switch_to.frame(chatbot_symbol_frame)
 
