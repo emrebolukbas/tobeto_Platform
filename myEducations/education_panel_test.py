@@ -24,9 +24,9 @@ class Test_myEducations():
      #Eğitim paneli kontrol
     def successful_login(self):     
         email_input = WebDriverWait(self.driver, 3).until(ec.visibility_of_element_located((By.XPATH, "/html/body/div[1]/div/main/section/div/div/div/div/form/input[1]")))
-        email_input.send_keys("utkutrn@hotmail.com")
+        email_input.send_keys("Eğitimleri Atanmış Bir Mail Adresi Giriniz")
         password_input = WebDriverWait(self.driver, 3).until(ec.visibility_of_element_located((By.XPATH, "/html/body/div[1]/div/main/section/div/div/div/div/form/input[2]")))
-        password_input.send_keys("tobeto1234")
+        password_input.send_keys("Parola Giriniz")
         login_button = WebDriverWait(self.driver, 4).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/button")))
         login_button.click()
         searchContent = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/div[2]")))

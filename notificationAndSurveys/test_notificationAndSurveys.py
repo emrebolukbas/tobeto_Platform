@@ -20,9 +20,9 @@ class Test_Notification:
 
     def successful_login(self):
         emailInput = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/input[1]")))
-        emailInput.send_keys("haceryalcnn@gmail.com")
+        emailInput.send_keys("Eğitimleri Atanmış Bir Mail Adresi Giriniz")
         passwordInput = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/input[2]")))
-        passwordInput.send_keys("Hy123456")
+        passwordInput.send_keys("Parola Giriniz")
         loginButton = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,  "//*[@id='__next']/div/main/section/div/div/div[1]/div/form/button")))
         loginButton.click()
         systemMessage = WebDriverWait(self.driver,5).until(ec.presence_of_element_located((By.XPATH, "//*[@id='__next']/div/div[2]/div/div[2]")))
