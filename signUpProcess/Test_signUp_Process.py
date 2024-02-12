@@ -123,7 +123,6 @@ class Test_signUp_Testing():
         sleep(1) 
         assert "Şifreniz en az 6 karakterden oluşmalıdır." in systemMessage
         
-        #4) Kullanıcının istenilen bilgiler doğrultusunda (Ad,Soyad,E-posta,Şifre,Şifre Tekrar) alanları hatalı doldurulup sisteme kayıt olma işlemi test edilecektir.
 
     #4) Kullanıcının istenilen bilgiler doğrultusunda alanları hatalı doldurulup sisteme kayıt olma işlemi test edilecektir.
     def test_signup_double_error(self):
