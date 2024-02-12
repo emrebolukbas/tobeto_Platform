@@ -46,9 +46,9 @@ class Test_signUp_Testing():
     def test_signup_successful(self):
         email = generate_random_email()
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
-        nameInput.send_keys("1")
+        nameInput.send_keys("tobeto")
         surNameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_SURNAME)))
-        surNameInput.send_keys("2")
+        surNameInput.send_keys("testing")
         emailInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_EMAIL)))
         emailInput.send_keys(email)
         passwordInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_PASSWORD)))
