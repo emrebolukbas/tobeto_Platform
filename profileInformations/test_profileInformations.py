@@ -26,7 +26,7 @@ class Test_profileInformations():
         eMail = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.E_MAIL_XPATH)))
         eMail.send_keys("fogacap180@ubinert.com")
         Password = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.PASSWORD_XPATH)))
-        Password.send_keys("abc1234")
+        Password.send_keys("abc123456")
         loginButton = self.driver.find_element(By.XPATH,c.LOGIN_BUTTON_XPATH)
         loginButton.click()
         systemMessage = WebDriverWait(self.driver,2).until(ec.presence_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
@@ -363,6 +363,7 @@ class Test_profileInformations():
             sleep(2)
             assert "Eğitim" in self.driver.page_source
 
+
     #Ayarlar sayfasında eski şifre farklı girilerek şifre değiştirme işlemi test edilecektir.
     def test_Setting_with_Diff_Password_Try(self):
         profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
@@ -439,7 +440,6 @@ class Test_profileInformations():
         systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
         assert "Yeni şifreniz mevcut şifrenizden farklı olmalıdır" in systemMessage
 
-    #Ayarlar sayfasında başarılı şekilde şifre değiştirme işlemi test edilecektir.
     def test_Setting_successfull_change_Password(self):
         profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
         profileImg.click()
@@ -448,19 +448,46 @@ class Test_profileInformations():
         settings = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[8]")))
         settings.click()
         oldPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/input")))
-        oldPassword.send_keys("abc1234")
+        oldPassword.send_keys("abc123456")
         newPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/input")))
-        newPassword.send_keys("abc123456")
+        newPassword.send_keys("abc1234")
         newPasswordAgain = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[3]/input")))
-        newPasswordAgain.send_keys("abc123456")
+        newPasswordAgain.send_keys("abc1234")
         changePassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/div/div[1]/button")))
         changePassword.click()
         systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
         sleep(5)
-        oldPassword.send_keys("abc123456")
-        newPassword.send_keys("abc1234")
-        newPasswordAgain.send_keys("abc1234")
+        oldPassword.send_keys("abc1234")
+        newPassword.send_keys("abc123456")
+        newPasswordAgain.send_keys("abc123456")
+        changePassword.click()
         assert "Şifreniz güncellenmiştir" in systemMessage
+    
+    
+    #Ayarlar sayfasında şifre alanına 6 karakter boşluk (space tuşu) karakteri girilerek şifre değiştirme işlemi test edilecektir.
+    def test_Setting_useSpaceKey_change_Password(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click()
+        settings = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[8]")))
+        settings.click()
+        oldPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/input")))
+        oldPassword.send_keys("abc123456")
+        newPassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/input")))
+        newPassword.send_keys("      ")
+        newPasswordAgain = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[3]/input")))
+        newPasswordAgain.send_keys("      ")
+        changePassword = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[2]/div/div/div[1]/button")))
+        changePassword.click()
+        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+        sleep(5)
+        oldPassword.send_keys("      ")
+        newPassword.send_keys("abc123456")
+        newPasswordAgain.send_keys("abc123456")
+        changePassword.click()
+        assert "Geçersiz Karakter Girişi" in systemMessage
+        #Gerçekleşen Sonuç: Şifre değiştirme işlemi başarılı bir şekilde gerçekleşmiştir.
 
     #Sertifikalarım sayfasının görüntülenmesi test edilecektir.
     def test_myCertificates_Check(self):
