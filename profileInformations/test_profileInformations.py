@@ -232,6 +232,7 @@ class Test_profileInformations():
         else:
             print("Boş bırakılabiliyor.")
         assert "Eğitim" in self.driver.page_source
+    
 
     #Eğitim Hayatım bölüm input kontrol
     def test_my_education_department_input_control(self):
@@ -405,7 +406,9 @@ class Test_profileInformations():
         save_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/button")))
         save_button.click()
         systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+
         assert "Sosyal medya adresiniz başarıyla eklendi" in systemMessage
+
         media_choose = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select")))
         media_choose.click()
         sleep(2)
@@ -418,8 +421,10 @@ class Test_profileInformations():
         save_button.click()
         sleep(2)
         systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
+
         #Varolan sosyal medya adresi ekleme
         assert "Bu sosyal medya zaten mevcut" in systemMessage.text
+
         closeSystemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[1]/button")))
         closeSystemMessage.click()
         delete_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".social-delete")))
@@ -427,10 +432,41 @@ class Test_profileInformations():
         yesButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".btn-yes")))
         yesButton.click()
         systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
+
         #sosyal medya adresi silme
         assert "Sosyal medya adresiniz başarıyla kaldırıldı" in systemMessage.text
         
-        
+    #Yabancı dil sayfası görüntüleme test edilecektir.   
+    def test_foreignLanguage(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click()
+        language = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/a[7]")))
+        language.click()
+        current_url = self.driver.current_url
+        expected_url = "https://tobeto.com/profilim/profilimi-duzenle/yabanci-dil"
+        assert current_url == expected_url
+    
+    def test_add_language(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click()
+        language = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/a[7]")))
+        language.click()
+        language_choose = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/select")))
+        language_choose.click()
+        choose =  WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/select/option[12]")))
+        choose.click()
+        level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select")))
+        level.click()
+        choose_level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select/option[5]")))
+        choose_level.click()
+        saveButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/button")))
+        saveButton.click()
+        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+        assert "Yabancı dil bilgisi eklendi." in systemMessage
 
     #Ayarlar sayfasında eski şifre farklı girilerek şifre değiştirme işlemi test edilecektir.
     def test_Setting_with_Diff_Password_Try(self):
