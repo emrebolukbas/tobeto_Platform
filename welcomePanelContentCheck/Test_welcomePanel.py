@@ -128,7 +128,26 @@ class Test_tobetoWelcomePanel():
         course_texts = [course.text for course in courses]
         #Bu kısımda seçilen eğitmen sonucu gelen TÜM eğitimlerin aynı eğitmene ait olduğunu teyit ediyoruz.
         assert all("Gürkan İlişen" in text for text in course_texts) and teacher.text == "Gürkan İlişen"
-        
+    
+    #8 Katalog sayfasında bulunan filtre alandaki seçilen yazılım diline ait eğitimlerin gelmesi test edilecektir.
+    def test_softwareLanguage_Lessons_filter(self):
+        catalog = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/ul/li[4]/a")))
+        catalog.click()
+        softwareLanguagesButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='headingTwo']/button/div")))
+        softwareLanguagesButton.click()
+        softwareLanguage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='collapseTwo']/div/ul/li[10]/a")))
+        assert softwareLanguage.text == "HTML"
+        self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_DOWN)
+        sleep(1)
+        chooseSoftwareLanguage = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='collapseTwo']/div/ul/li[10]/a/input")))
+        chooseSoftwareLanguage.click()
+        sleep(1)
+        self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.PAGE_UP)
+        lessons = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/div[2]/div/div[2]/div/div/p")))
+        expectedResult = "HTML" in lessons.text
+        assert expectedResult is True and softwareLanguage.text == "HTML"
+        # Gerçekleşen sonuç: HTML diline ait eğitimlerin gelmediği görülmüştür. Bu durumda test başarısız olmuştur.
+          
     #8 Katalog sayfasında bulunan filtre alandaki eğitmene ait eğitim içeriğinin bulunmaması test edilecektir.
     def test_unsuccessful_filter(self):
         catalog = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/ul/li[4]/a")))
