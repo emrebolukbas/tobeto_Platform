@@ -363,6 +363,74 @@ class Test_profileInformations():
             sleep(2)
             assert "Eğitim" in self.driver.page_source
 
+    #Sosyal Medya sayfası görüntüleme test edilecektir.
+    def test_socialMedia(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click() 
+        socialMedia = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[6]")))
+        socialMedia.click()
+        current_url = self.driver.current_url
+        expected_url = "https://tobeto.com/profilim/profilimi-duzenle/medya-hesaplarim"
+        assert current_url == expected_url
+    
+    #Doldurulması zorunlu alanlar doldurulmadan sosyal medya hesapları kaydedilme işlemi test edilecektir.
+    def test_mardatoryArea_mymedia(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click() 
+        socialMedia = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[6]")))
+        socialMedia.click()
+        save_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/form/button")))
+        save_button.click()
+        MandatoryArea = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div[1]/form/div/div[1]/span")))
+        assert "Doldurulması zorunlu alan" in MandatoryArea.text
+    
+    #Sosyal medya hesapları ekleme işlemi test edilecektir.
+    def test_socialmedia_add_delete(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click() 
+        socialMedia = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/main/section/div/div/div[1]/div/a[6]")))
+        socialMedia.click()
+        media_choose = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select")))
+        media_choose.click()
+        linkedin_add = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select/option[4]")))
+        linkedin_add.click()
+        linkArea = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[2]/input")))
+        linkArea.send_keys("https://www.linkedin.com/in/tobeto-test/")
+        save_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/button")))
+        save_button.click()
+        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+        assert "Sosyal medya adresiniz başarıyla eklendi" in systemMessage
+        media_choose = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select")))
+        media_choose.click()
+        sleep(2)
+        linkedin_add = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[1]/select/option[4]")))
+        linkedin_add.click()
+        sleep(2)
+        linkArea = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/div/div[2]/input")))
+        linkArea.send_keys("https://www.linkedin.com/in/tobeto-test/")
+        save_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/form/button")))
+        save_button.click()
+        sleep(2)
+        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
+        #Varolan sosyal medya adresi ekleme
+        assert "Bu sosyal medya zaten mevcut" in systemMessage.text
+        closeSystemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[1]/button")))
+        closeSystemMessage.click()
+        delete_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".social-delete")))
+        delete_button.click()
+        yesButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".btn-yes")))
+        yesButton.click()
+        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]")))
+        #sosyal medya adresi silme
+        assert "Sosyal medya adresiniz başarıyla kaldırıldı" in systemMessage.text
+        
+        
 
     #Ayarlar sayfasında eski şifre farklı girilerek şifre değiştirme işlemi test edilecektir.
     def test_Setting_with_Diff_Password_Try(self):
