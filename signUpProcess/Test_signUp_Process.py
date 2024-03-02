@@ -81,8 +81,49 @@ class Test_signUp_Testing():
         signUpResult = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CLASS_NAME,"success-payment-text")))
         sleep(1) 
         assert "Tobeto Platform'a kaydınız başarıyla gerçekleşti." in signUpResult.text
+    
+    #3) Kullanıcının ad soyad alanına sayısal değer girerek ve diğer alanları doldurulup sisteme başarılı şekilde kayıt olma işlemi test edilecektir.
+    def test_singUp_tryIntChar_nameSurname_(self):
+        email = generate_random_email()
+        nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
+        nameInput.send_keys("1")
+        surNameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_SURNAME)))
+        surNameInput.send_keys("12")
+        emailInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_EMAIL)))
+        emailInput.send_keys(email)
+        passwordInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_PASSWORD)))
+        passwordInput.send_keys("123456")
+        passwordAgainInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_PASSWORD_AGAIN)))
+        passwordAgainInput.send_keys("123456")
+        signUpButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CONTINUE)))
+        signUpButton.click()
+        signUpContract = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CONTRACT))).text
+        sleep (1)
+        assert "Kayıt oluşturmak için gerekli sözleşmeler" in signUpContract
+        checkbox1 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CHECKBOX_1)))
+        checkbox1.click()
+        checkbox2 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CHECKBOX_2)))
+        checkbox2.click()
+        checkbox3 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CHECKBOX_3)))
+        checkbox3.click()
+        checkbox4 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CHECKBOX_4)))
+        checkbox4.click()
+        phoneNumberInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_PHONE)))
+        phoneNumberInput.send_keys("5553332211")
+        iframe = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, c.SIGN_UP_IFRAME_XPATH)))
+        self.driver.switch_to.frame(iframe)
+        captcha = WebDriverWait(self.driver,5).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_CAPTCHA)))
+        captcha.click()
+        sleep(10)
+        self.driver.switch_to.default_content()
+        finishButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_FINISH)))
+        finishButton.click()
+        signUpResult = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CLASS_NAME,"success-payment-text")))
+        sleep(1) 
+        assert "Geçersiz Karakter Girişi." in signUpResult.text
+        #Gerçekleşen Sonuç: Ad ve Soyad alanlarına sayısal değer girildiğinde sistemde kayıt olma işlemi başarılı bir şekilde gerçekleşmiştir.
 
-    #3) Kullanıcının istenilen bilgiler doğrultusunda şifre alanına 6 karakterden az doldurup sisteme kayıt olma işlemi test edilecektir.
+    #4) Kullanıcının istenilen bilgiler doğrultusunda şifre alanına 6 karakterden az doldurup sisteme kayıt olma işlemi test edilecektir.
     def test_signup_unsuccessful_missing_password(self):
         email = generate_random_email()
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
@@ -124,7 +165,7 @@ class Test_signUp_Testing():
         assert "Şifreniz en az 6 karakterden oluşmalıdır." in systemMessage
         
 
-    #4) Kullanıcının istenilen bilgiler doğrultusunda alanları hatalı doldurulup sisteme kayıt olma işlemi test edilecektir.
+    #5) Kullanıcının istenilen bilgiler doğrultusunda alanları hatalı doldurulup sisteme kayıt olma işlemi test edilecektir.
     def test_signup_double_error(self):
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
         nameInput.send_keys("test")
@@ -164,7 +205,7 @@ class Test_signUp_Testing():
         sleep(1) 
         assert "2 errors occurred" in systemMessage
 
-    #5) Kullanıcının istenilen bilgiler doğrultusunda sistemde kayıtlı eposta ile sisteme kayıt olma işlemi test edilecektir.
+    #6) Kullanıcının istenilen bilgiler doğrultusunda sistemde kayıtlı eposta ile sisteme kayıt olma işlemi test edilecektir.
     def test_signup_exist_mail(self):
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
         nameInput.send_keys("test")
@@ -204,7 +245,7 @@ class Test_signUp_Testing():
         sleep(1) 
         assert "Girdiğiniz e-posta adresi ile kayıtlı üyelik bulunmaktadır." in systemMessage
 
-    #6) Kullanıcının istenilen bilgiler doğrultusunda şifreleri farklı doldurulup sisteme kayıt olma işlemi test edilecektir.
+    #7) Kullanıcının istenilen bilgiler doğrultusunda şifreleri farklı doldurulup sisteme kayıt olma işlemi test edilecektir.
     def test_signup_diffrent_password(self):
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
         nameInput.send_keys("1")
@@ -244,7 +285,7 @@ class Test_signUp_Testing():
         sleep(1) 
         assert "Şifreler eşleşmedi" in systemMessage
 
-    #7) Kullanıcının eksik telefon numarası girerek sisteme kayıt olma işlemi test edilecektir.
+    #8) Kullanıcının eksik telefon numarası girerek sisteme kayıt olma işlemi test edilecektir.
     def test_signup_missing_phoneNumber(self):
         nameInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_NAME)))
         nameInput.send_keys("1")
@@ -283,7 +324,7 @@ class Test_signUp_Testing():
         mandatoryAreaText = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"/html/body/div[4]/div/div/div/div/div/label[4]/small/p"))).text
         assert "En az 10 karakter girmelisiniz." in mandatoryAreaText
 
-    #8) Kullanıcının kayıt ol formuna geçersiz eposta girme işlemi test edilecektir.
+    #9) Kullanıcının kayıt ol formuna geçersiz eposta girme işlemi test edilecektir.
     def test_signup_invalid_mail(self):
         emailInput = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,c.SIGN_UP_EMAIL)))
         emailInput.send_keys("test")
