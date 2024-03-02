@@ -11,6 +11,7 @@ import pytest
 import openpyxl
 from constants import globalConstants as c
 from selenium.webdriver.support.ui import Select
+import time
 
 class Test_profileInformations():
     def setup_method(self):
@@ -465,8 +466,65 @@ class Test_profileInformations():
         choose_level.click()
         saveButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/button")))
         saveButton.click()
-        systemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
-        assert "Yabancı dil bilgisi eklendi." in systemMessage
+        systemMessage1 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+
+        assert "Yabancı dil bilgisi eklendi." in systemMessage1
+
+        closeSystemMessage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[1]/button")))
+        closeSystemMessage.click()
+        choose =  WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/select/option[12]")))
+        choose.click()
+        level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select")))
+        level.click()
+        choose_level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select/option[5]")))
+        choose_level.click()
+        saveButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/button")))
+        saveButton.click()
+        systemMessage2 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+        #Varolan yabancı dil ekleme
+        assert "Bu dil zaten mevcut." in systemMessage2
+
+        sleep(2)
+        expectedLanguage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/div/div")))
+        expectedLanguage.click()
+        delete_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CLASS_NAME, "delete-lang")))
+        delete_button.click()
+        yesButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".btn-yes")))
+        yesButton.click()
+        sleep(2)
+        
+
+    def test_delete_language(self):
+        profileImg = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/button")))
+        profileImg.click()
+        myInformationButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/nav/div[1]/div/div/div[2]/ul/li[1]/a")))
+        myInformationButton.click()
+        language = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[1]/div/a[7]")))
+        language.click()
+        language_choose = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/select")))
+        language_choose.click()
+        choose =  WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[1]/select/option[12]")))
+        choose.click()
+        level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select")))
+        level.click()
+        choose_level = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/div/div[2]/select/option[5]")))
+        choose_level.click()
+        saveButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/form/button")))
+        saveButton.click()
+        systemMessage1 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+
+        assert "Yabancı dil bilgisi eklendi." in systemMessage1
+
+        sleep(2)
+        expectedLanguage = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH, "//*[@id='__next']/div/main/section/div/div/div[2]/div/div/div")))
+        expectedLanguage.click()
+        delete_button = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CLASS_NAME, "delete-lang")))
+        delete_button.click()
+        yesButton = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.CSS_SELECTOR, ".btn-yes")))
+        yesButton.click()
+        systemMessage3 = WebDriverWait(self.driver,2).until(ec.visibility_of_element_located((By.XPATH,"//*[@id='__next']/div/div[2]/div/div[2]"))).text
+        assert "Yabancı dil kaldırıldı" in systemMessage3
+    
 
     #Ayarlar sayfasında eski şifre farklı girilerek şifre değiştirme işlemi test edilecektir.
     def test_Setting_with_Diff_Password_Try(self):
